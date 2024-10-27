@@ -1,28 +1,15 @@
-#navbar {
+/* #menuTitle {
     font-size: medium;
     margin-right: 20px;
 }
 
-@media (min-width: 900px) {
-    #menuIcon {
-        display: none;
-    }
-}
-
-@media (max-width: 900px) {
-    .top-menu-item {
-        display: none;
-    }
-
+.mat-toolbar {
+    height: 60px;
 }
 
 .mat-sidenav {
     background-color: #3F51B5;
     width: 160px;
-}
-
-.mat-toolbar {
-    height: 50px;
 }
 
 .side-nav-items {
@@ -36,5 +23,21 @@
 }
 
 .main-content {
-    margin-left: 20px;
+    margin: 20px;
 }
+
+@media (min-width: 900px) {
+    #menuIcon {
+        display: none;
+    }
+
+    .mat-sidenav {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .top-menu-item {
+        display: none;
+    }
+} */

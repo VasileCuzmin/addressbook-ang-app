@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
+import { IContact } from '../interfaces/IContact';
+import { Guid } from "guid-typescript";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { PageResult } from '../pagination/PageResult';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsService {
-  contacts = [
-    { Id: 1, firstName: 'John', lastName: 'Smith', address: '111 Main St', phoneNumber: '111-1111-1111' },
-    { Id: 1, firstName: 'Jane', lastName: 'Smith', address: '111 Main St', phoneNumber: '111-555-1111' },
-    { Id: 1, firstName: 'Mary', lastName: 'Smith', address: '111 Main St', phoneNumber: '111-1111-55553' },
-    { Id: 1, firstName: 'Jack', lastName: 'Smith', address: '111 Main St', phoneNumber: '455-1111-1111' }
+  private apiURL: string;
 
-  ]
-
-  constructor() { }
-
-  getContacts() {
-    return this.contacts;
+  constructor(private http: HttpClient) {
+    this.apiURL = 'https://localhost:7046/api';
   }
+  public getContactDetails(id: Guid) {
+    return this.http.get<IContact>((`${this.apiURL}/Contacts/${id}`));
+  }
+
+  getContacts(page: number, pageSize: number): Observable<PageResult<IContact>> {
+    return this.http.get<PageResult<IContact>>(`${this.apiURL}/Contacts?Page=${page}&PageSize=${pageSize}`);
+  }
+
+  // getContactDetails(id: Guid): IContact[] {
+  //   return this.contacts.filter(c => c.Id === id);
+  // }
 }

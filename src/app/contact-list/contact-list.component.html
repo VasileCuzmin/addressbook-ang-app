@@ -1,0 +1,43 @@
+<div class="container">
+  <mat-card class="px-0 rounded-lg mat-elevation-z3">
+    <mat-card-title class="px-4">
+      <h2 class="text-blue-700">My Contacts</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <ng-container
+          *ngFor="
+            let contact of contacts
+              | paginate
+                : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  }
+          "
+        >
+          <mat-list-item class="hover:bg-gray-100 cursor-pointer">
+            <contact-list-item [contact]="contact"></contact-list-item>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="row">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onPageChange($event)"
+    ></pagination-controls>
+  </div>
+  <div class="col-md-4">
+    Items per page:
+    <select (change)="onPageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [value]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+</div>
